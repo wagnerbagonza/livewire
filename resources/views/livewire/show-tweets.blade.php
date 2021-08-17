@@ -1,10 +1,13 @@
 <div>
     Show Tweets
 
-    <p>{{$messege}}</p>
+    <p>{{$content}}</p>
 
     <form action="" method="post" wire:submit.prevent="create">
-        <input type="text" name="messege" id="message" wire:model="messege"><br>
+        <input type="text" name="content" id="content" wire:model="content">
+        @error('content')
+            {{$message}}
+        @enderror
         <button type="submit">Criar Tweet</button>
     </form>
     <hr>

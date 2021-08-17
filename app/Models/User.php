@@ -40,4 +40,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    //Relacionamento 1 pra muitos
+    public function tweets()
+    {
+        return $this->hasMany(Tweet::class);
+    }
 }

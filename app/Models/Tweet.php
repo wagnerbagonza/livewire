@@ -16,4 +16,18 @@ class Tweet extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function likes()
+    {   
+        // Filtra tweets curtidos por usuário autenticado
+        //return $this->hasMany(Like::class)->where('user_id', auth()->user()->id);
+
+        //Outra maneira de fazer
+        return $this->hasMany(Like::class)
+                    ->where(function($query){
+                        if(auth()->check()){
+                            $query->where('user_id', auth()->user()->id);
+                        }
+                    });
+    }
 }

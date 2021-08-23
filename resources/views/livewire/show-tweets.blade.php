@@ -12,7 +12,13 @@
     </form>
     <hr>
     @foreach($tweets as $tweet)
-        {{ $tweet->user->name}} - {{ $tweet->content}} 
+        @if ($tweet->user->photo)
+            <img src="{{ url("storage/{$tweet->user->photo}") }}" alt="{{$tweet->user->name}}">
+        @else   
+            <img src="{{ url('imgs/img_default.png') }}" alt="{{$tweet->user->name}}">
+        @endif
+        
+        {{ $tweet->user->name }} - {{ $tweet->content}} ----{{$tweet->user->photo}}
         @if($tweet->likes->count())
             <a href="#" wire:click.prevent="unlike({{ $tweet->id }})">Descurtir</a>
         @else
